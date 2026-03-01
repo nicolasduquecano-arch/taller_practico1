@@ -23,7 +23,7 @@ for (let i = 1; i <= cantidadClientes; i++) {
     }
 
     const totalPagar = costoTotal - descuento;
-    const mensaje = horasServicio > 12 ? 'descuento aplicado' : 'no se aplicó descuento';
+    const mensaje = horasServicio > 12 ? 'descuento aplicado' : 'Para obtener descuento, el servicio debe ser mayor a 12 horas';
 
     console.log(`--- CLIENTE ${i}: ${nombreCliente} ---`);
     console.log('Horas:', horasServicio);
