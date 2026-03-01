@@ -6,11 +6,24 @@ let cont60_80 = 0, contMayor80 = 0, contNoAplica = 0;
 
 let cantidadPersonas = parseInt(readline.question("¿Cuántas personas va a registrar? "), 10);
 
+// Validación
+if (cantidadPersonas <= 0) {
+    console.log("Error: debe ingresar una cantidad mayor a 0");
+    process.exit(1);
+}
+
 for (let i = 1; i <= cantidadPersonas; i++) {
     console.log(`\n--- PERSONA ${i} ---`);
 
     let nombre = readline.question("Nombre completo: ");
     let edad = parseInt(readline.question("Edad: "), 10);
+
+    // Validación de edad
+    if (edad < 0 || edad > 120 || isNaN(edad)) {
+        console.log("Error: edad inválida. Saltando registro...");
+        i--;
+        continue;
+    }
 
     let porcentaje = (edad >= 60 && edad <= 80) ? 12 :
                      (edad > 80) ? 15 : 0;
@@ -21,8 +34,13 @@ for (let i = 1; i <= cantidadPersonas; i++) {
     let subsidio = salarioMinimo * (porcentaje / 100);
 
     // Contadores
-    edad >= 60 && edad <= 80 ? cont60_80++ :
-    edad > 80 ? contMayor80++ : contNoAplica++;
+    if (edad >= 60 && edad <= 80) {
+        cont60_80++;
+    } else if (edad > 80) {
+        contMayor80++;
+    } else {
+        contNoAplica++;
+    }
 
     // Acumular presupuesto
     totalPresupuesto += subsidio;
